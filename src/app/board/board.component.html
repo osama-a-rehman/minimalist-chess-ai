@@ -1,0 +1,23 @@
+<div class="board w-full h-full">
+	<ng-container *ngFor="let row of board; let x = index">
+		<!-- [ngClass]="{'mr-2': piece.type==PieceType.PAWN}" -->
+
+		<div
+			class="square"
+			*ngFor="let piece of row; let y = index"
+			(click)="onPieceFocus(piece)"
+			[ngClass]="{
+				focused: piece != undefined && piece === focusedPiece,
+				'could-move':
+					focusedPiece != undefined &&
+					couldMove({ x: this.x, y: this.y })
+			}"
+		>
+			<img
+				*ngIf="piece != undefined"
+				[attr.src]="piece.imageUrl"
+				class="w-full"
+			/>
+		</div>
+	</ng-container>
+</div>

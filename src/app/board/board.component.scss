@@ -1,0 +1,62 @@
+$board-size: 8;
+$square-size: 12.5%;
+$light-square-color: #eeeed2;
+$light-square-color--focused: #f6f669;
+$dark-square-color: #769656;
+$dark-square-color--focused: #baca2b;
+
+.board {
+	display: inline-grid;
+	grid-auto-rows: $square-size;
+	grid-template-columns: repeat($board-size, $square-size);
+	border: 4px solid darken($dark-square-color, 10%);
+
+	.square {
+		position: relative;
+		background: $dark-square-color;
+
+		&.focused {
+			background: $dark-square-color--focused;
+		}
+
+		&.could-move::before {
+			content: '';
+			width: 30%;
+			height: 30%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			background: rgba(#000000, 0.2);
+			border-radius: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	$board-size-minus-1: $board-size - 1;
+	.square:nth-child(-2n + #{$board-size-minus-1}) {
+		background: $light-square-color;
+	}
+
+	@for $i from 1 through $board-size {
+		$row-start: $i * $board-size;
+		$row-end--odd: $row-start + $board-size;
+		$row-end--even: $row-start + $board-size - 1;
+
+		$start: $i * $board-size;
+		$end: 0;
+
+		@if $i % 2 == 0 {
+			$end: $row-end--even;
+		} @else {
+			$end: $row-end--odd;
+		}
+
+		.square:nth-child(#{$start}) ~ .square:nth-child(-2n + #{$end}) {
+			background: $light-square-color;
+
+			&.focused {
+				background: $light-square-color--focused;
+			}
+		}
+	}
+}
