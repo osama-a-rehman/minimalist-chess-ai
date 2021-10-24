@@ -6,7 +6,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"tailwind-boilerplate": {
+		"minimalist-chess-ai": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
@@ -26,7 +26,7 @@
 						"customWebpackConfig": {
 							"path": "webpack.config.js"
 						},
-						"outputPath": "dist/tailwind-boilerplate",
+						"outputPath": "dist/minimalist-chess-ai",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
 				"serve": {
 					"builder": "@angular-builders/custom-webpack:dev-server",
 					"options": {
-						"browserTarget": "tailwind-boilerplate:build"
+						"browserTarget": "minimalist-chess-ai:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "tailwind-boilerplate:build:production"
+							"browserTarget": "minimalist-chess-ai:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "tailwind-boilerplate:build"
+						"browserTarget": "minimalist-chess-ai:build"
 					}
 				},
 				"test": {
@@ -110,16 +110,16 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "tailwind-boilerplate:serve"
+						"devServerTarget": "minimalist-chess-ai:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "tailwind-boilerplate:serve:production"
+							"devServerTarget": "minimalist-chess-ai:serve:production"
 						}
 					}
 				}
 			}
 		}
 	},
-	"defaultProject": "tailwind-boilerplate"
+	"defaultProject": "minimalist-chess-ai"
 }

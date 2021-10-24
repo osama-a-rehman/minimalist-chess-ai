@@ -27,7 +27,7 @@ module.exports = function (config) {
 		coverageReporter: {
 			dir: require('path').join(
 				__dirname,
-				'./coverage/tailwind-boilerplate'
+				'./coverage/minimalist-chess-ai'
 			),
 			subdir: '.',
 			reporters: [{ type: 'html' }, { type: 'text-summary' }],
