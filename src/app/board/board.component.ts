@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, Piece, Rank, File } from './pieces/piece';
 import { Board, BoardUtil } from './utils/board.util';
-import * as chess from 'chess';
+import { AiUtil } from './utils/ai.util';
+
+//@ts-ignore
+const Chess = require("chess.js");
 
 @Component({
 	selector: 'app-board',
@@ -9,11 +12,13 @@ import * as chess from 'chess';
 	styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-	private _gameClient: any = chess.create({ PGN: true });
+	private _gameClient: any = new Chess();
 	private _board: Board = BoardUtil.getBoardFromGameClient(this._gameClient);
 	public get board() {
 		return this._board;
 	}
+
+	private _currentMove: Color = Color.WHITE;
 
 	public focusedPiece: Piece | null = null;
 	public possibleMoves: Array<{
@@ -24,24 +29,23 @@ export class BoardComponent implements OnInit {
 
 	public Color = Color;
 
-	constructor() {}
+	constructor() {
+	}
 
 	ngOnInit(): void {
-		console.log(this._gameClient);
 	}
 
 	public couldMove({ rank, file }: { rank: Rank; file: File }): boolean {
-		// console.log(
-		// 	rank,
-		// 	file,
-		// 	this.possibleMoves.some((p) => rank === p.rank && file === p.file)
-		// );
 		return this.possibleMoves.some(
 			(p) => rank === p.rank && file === p.file
 		);
 	}
 
 	public onSquareClick(piece: Piece): void {
+		if (this._currentMove != Color.WHITE) {
+			return;
+		}
+
 		if (this.focusedPiece != undefined) {
 			const move = this.possibleMoves.find(
 				(move) => move.file === piece.file && move.rank === piece.rank
@@ -49,9 +53,12 @@ export class BoardComponent implements OnInit {
 			if (move) {
 				this._gameClient.move(move.notatedMove);
 				this.resetFocus();
+				this.switchMove();
 				this._board = BoardUtil.getBoardFromGameClient(
 					this._gameClient
 				);
+
+				this.makeAiMove();
 				return;
 			}
 
@@ -64,40 +71,35 @@ export class BoardComponent implements OnInit {
 		if (piece.color === Color.NONE) return;
 
 		this.focusedPiece = piece;
-		this.possibleMoves = this._gameClient.validMoves
-			.filter(
-				(move) =>
-					move.src.file === this.focusedPiece.file &&
-					move.src.rank === this.focusedPiece.rank
-			)
-			.flatMap((move) =>
-				move.squares.map((square) => ({
-					notatedMove: '',
-					file: square.file,
-					rank: square.rank,
-				}))
+		this.possibleMoves = this._gameClient.moves({
+			square: `${piece.file}${piece.rank}`,
+			verbose: true
+		})
+			.map((move) =>
+			({
+				notatedMove: move.san,
+				file: move.to[0],
+				rank: +move.to[1],
+			})
 			);
-		this.possibleMoves = this.possibleMoves.map((possibleMove) => {
-			const moveEntry = Object.entries(
-				this._gameClient.notatedMoves
-			).find(
-				([_, _move]) =>
-					(<any>_move).src.file === piece.file &&
-					(<any>_move).src.rank === piece.rank &&
-					(<any>_move).dest.file === possibleMove.file &&
-					(<any>_move).dest.rank === possibleMove.rank
-			);
+	}
 
-			return {
-				file: possibleMove.file,
-				rank: possibleMove.rank,
-				notatedMove: moveEntry[0],
-			};
-		});
+	private makeAiMove() {
+		const bestMoveNotated = AiUtil.calculateBestMove(this._gameClient, Color.BLACK, 2);
+		this._gameClient.move(bestMoveNotated);
+		this.resetFocus();
+		this.switchMove();
+		this._board = BoardUtil.getBoardFromGameClient(
+			this._gameClient
+		);
 	}
 
 	private resetFocus() {
 		this.focusedPiece = null;
 		this.possibleMoves = [];
+	}
+
+	private switchMove() {
+		this._currentMove = this._currentMove === Color.WHITE ? Color.BLACK : Color.WHITE;
 	}
 }

@@ -54,13 +54,6 @@
  *
  */
 
-(window as any).global = window;
-
-// @ts-ignore
-global.Buffer = global.Buffer || require('buffer').Buffer;
-// @ts-ignore
-global.process = require('process');
-
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */

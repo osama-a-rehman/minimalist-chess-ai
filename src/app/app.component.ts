@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Color } from './board/pieces/piece';
 
 @Component({
 	selector: 'app-root',
@@ -6,7 +7,4 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-	public goToCodePen() {
-		window.open('https://codepen.io/ilkerkurtel/pen/MWaJzzw', '_blank');
-	}
 }
