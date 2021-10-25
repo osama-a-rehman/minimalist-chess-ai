@@ -5,12 +5,13 @@
 		<div
 			class="square"
 			*ngFor="let piece of row; let y = index"
-			(click)="onPieceFocus(piece)"
+			(click)="onSquareClick(piece)"
 			[ngClass]="{
-				focused: piece != undefined && piece === focusedPiece,
+				focused: piece === focusedPiece,
 				'could-move':
-					focusedPiece != undefined &&
-					couldMove({ x: this.x, y: this.y })
+					focusedPiece != null &&
+					couldMove({ rank: piece.rank, file: piece.file }),
+				'is-piece': piece.color != Color.NONE
 			}"
 		>
 			<img

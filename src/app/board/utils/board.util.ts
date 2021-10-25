@@ -1,4 +1,4 @@
-import { Color, Piece } from '../pieces/piece';
+import { Color, Piece, Rank, File } from '../pieces/piece';
 import { Pawn } from '../pieces/pawn';
 import { Notation } from './chess.util';
 import { Rook } from '../pieces/rook';
@@ -6,70 +6,71 @@ import { Knight } from '../pieces/knight';
 import { Bishop } from '../pieces/bishop';
 import { King } from '../pieces/king';
 import { Queen } from '../pieces/queen';
+import { None } from '../pieces/none';
 
 export type Board = Array<Array<Piece | undefined>>;
 export type NotationalPieces = Array<{ notation: string; piece: Piece }>;
 
 export class BoardUtil {
-	public static getInitialBoard(): Board {
-		const whitePieces: NotationalPieces = [
-			...['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((file) => ({
-				notation: `${file}2`,
-				piece: new Pawn(Color.WHITE),
-			})),
+	public static getBoardFromGameClient(gameClient: any): Board {
+		const board: Board = Array(8)
+			.fill(null)
+			.map((_) => Array(8).fill(null));
 
-			{ notation: 'a1', piece: new Rook(Color.WHITE) },
-			{ notation: 'h1', piece: new Rook(Color.WHITE) },
+		for (const square of gameClient.game.board.squares) {
+			const { file, rank, piece } = square;
+			const [x, y] = [
+				BoardUtil.getXFromRank(rank),
+				BoardUtil.getYFromFile(file),
+			];
 
-			{ notation: 'b1', piece: new Knight(Color.WHITE) },
-			{ notation: 'g1', piece: new Knight(Color.WHITE) },
+			if (!piece) {
+				const nonePiece = new None(Color.NONE);
+				nonePiece.file = file;
+				nonePiece.rank = rank;
+				board[x][y] = nonePiece;
+				continue;
+			}
 
-			{ notation: 'c1', piece: new Bishop(Color.WHITE) },
-			{ notation: 'f1', piece: new Bishop(Color.WHITE) },
+			const color =
+				piece.side.name === 'white' ? Color.WHITE : Color.BLACK;
+			let boardPiece: Piece;
 
-			{ notation: 'd1', piece: new Queen(Color.WHITE) },
-			{ notation: 'e1', piece: new King(Color.WHITE) },
-		];
+			switch (piece.type) {
+				case 'pawn':
+					{
+					}
+					boardPiece = new Pawn(color);
+					break;
+				case 'knight':
+					boardPiece = new Knight(color);
+					break;
+				case 'bishop':
+					boardPiece = new Bishop(color);
+					break;
+				case 'rook':
+					boardPiece = new Rook(color);
+					break;
+				case 'queen':
+					boardPiece = new Queen(color);
+					break;
+				case 'king':
+					boardPiece = new King(color);
+					break;
+			}
 
-		const blackPieces: NotationalPieces = [
-			...['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map((file) => ({
-				notation: `${file}7`,
-				piece: new Pawn(Color.BLACK),
-			})),
-
-			{ notation: 'a8', piece: new Rook(Color.BLACK) },
-			{ notation: 'h8', piece: new Rook(Color.BLACK) },
-
-			{ notation: 'b8', piece: new Knight(Color.BLACK) },
-			{ notation: 'g8', piece: new Knight(Color.BLACK) },
-
-			{ notation: 'c8', piece: new Bishop(Color.BLACK) },
-			{ notation: 'f8', piece: new Bishop(Color.BLACK) },
-
-			{ notation: 'd8', piece: new Queen(Color.BLACK) },
-			{ notation: 'e8', piece: new King(Color.BLACK) },
-		];
-
-		let board = Array(8)
-			.fill(undefined)
-			.map((_) => Array(8).fill(undefined));
-
-		for (const { notation, piece } of [...whitePieces, ...blackPieces]) {
-			board = this.setPieceOnBoard(piece, notation, board);
+			boardPiece.file = file;
+			boardPiece.rank = rank;
+			board[x][y] = boardPiece;
 		}
 
 		return board;
 	}
 
-	private static setPieceOnBoard(
-		piece: Piece,
-		notation: string,
-		board: Board
-	): Board {
-		const newBoard: Board = board.map((row) => row.slice());
-		const { x, y } = Notation.getPositionFromNotation(notation);
-
-		newBoard[x][y] = piece;
-		return newBoard;
+	private static getYFromFile(file: File) {
+		return file.charCodeAt(0) - 97;
+	}
+	private static getXFromRank(rank: Rank) {
+		return 8 - rank;
 	}
 }

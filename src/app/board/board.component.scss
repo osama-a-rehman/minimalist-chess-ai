@@ -19,7 +19,7 @@ $dark-square-color--focused: #baca2b;
 			background: $dark-square-color--focused;
 		}
 
-		&.could-move::before {
+		&.could-move::after {
 			content: '';
 			width: 30%;
 			height: 30%;
@@ -29,6 +29,12 @@ $dark-square-color--focused: #baca2b;
 			background: rgba(#000000, 0.2);
 			border-radius: 50%;
 			transform: translate(-50%, -50%);
+		}
+		&.could-move.is-piece::after {
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			border: 0.75rem solid rgba(#000000, 0.2);
 		}
 	}
 

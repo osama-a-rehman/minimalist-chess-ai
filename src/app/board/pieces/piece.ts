@@ -1,6 +1,10 @@
+export type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type File = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h';
+
 export enum Color {
 	WHITE = 'white',
 	BLACK = 'black',
+	NONE = 'none',
 }
 
 export class Position {
@@ -19,9 +23,10 @@ export enum PieceType {
 
 export abstract class Piece {
 	color: Color;
-	position: Position;
 	imageUrl: string;
 	type: PieceType;
+	rank: Rank;
+	file: File;
 
 	constructor(color: Color) {
 		this.color = color;
