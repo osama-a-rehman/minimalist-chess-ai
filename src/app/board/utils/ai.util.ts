@@ -59,7 +59,6 @@ export class AiUtil {
             }
         }
 
-        console.log(bestMoveValue, bestMoveNotated)
         return bestMoveNotated;
     }
 

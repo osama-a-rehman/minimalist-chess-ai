@@ -16,11 +16,7 @@
 		"importHelpers": true,
 		"target": "es2015",
 		"module": "es2020",
-		"lib": ["es2018", "dom"],
-		"paths": {
-			"crypto": ["node_modules/crypto-browserify"],
-			"stream": ["node_modules/stream-browserify"]
-		}
+		"lib": ["es2018", "dom"]
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,

@@ -33,6 +33,16 @@ export class BoardComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		if (typeof Worker !== 'undefined') {
+			//@ts-ignore
+			const worker = new Worker('./worker/ai.worker', { type: 'module' });
+
+			worker.onmessage = (message) => {
+				console.log(`page got message: ${message}`);
+			};
+
+			worker.postMessage('hello');
+		}
 	}
 
 	public couldMove({ rank, file }: { rank: Rank; file: File }): boolean {
