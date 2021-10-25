@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Color, Piece, Rank, File } from './pieces/piece';
 import { Board, BoardUtil } from './utils/board.util';
 import { AiUtil } from './utils/ai.util';
+import { AiService } from './services/ai.service';
 
 //@ts-ignore
 const Chess = require("chess.js");
@@ -29,20 +30,13 @@ export class BoardComponent implements OnInit {
 
 	public Color = Color;
 
-	constructor() {
+	constructor(private aiService: AiService) {
 	}
 
 	ngOnInit(): void {
-		if (typeof Worker !== 'undefined') {
-			//@ts-ignore
-			const worker = new Worker('./worker/ai.worker', { type: 'module' });
-
-			worker.onmessage = (message) => {
-				console.log(`page got message: ${message}`);
-			};
-
-			worker.postMessage('hello');
-		}
+		this.aiService.calculateBestMove(this._gameClient.fen(), Color.WHITE, 2).subscribe(data => {
+			console.log(data);
+		});
 	}
 
 	public couldMove({ rank, file }: { rank: Rank; file: File }): boolean {
@@ -95,13 +89,16 @@ export class BoardComponent implements OnInit {
 	}
 
 	private makeAiMove() {
-		const bestMoveNotated = AiUtil.calculateBestMove(this._gameClient, Color.BLACK, 2);
-		this._gameClient.move(bestMoveNotated);
 		this.resetFocus();
-		this.switchMove();
-		this._board = BoardUtil.getBoardFromGameClient(
-			this._gameClient
-		);
+
+		this.aiService.calculateBestMove(this._gameClient.fen(), Color.BLACK, 2).subscribe(bestMoveNotated => {
+			this._gameClient.move(bestMoveNotated);
+			this.switchMove();
+			this._board = BoardUtil.getBoardFromGameClient(
+				this._gameClient
+			);
+		});
+
 	}
 
 	private resetFocus() {
