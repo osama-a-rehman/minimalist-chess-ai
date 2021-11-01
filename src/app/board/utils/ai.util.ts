@@ -2,47 +2,7 @@ import { Color, Piece, PieceType } from "../pieces/piece";
 import { Board, BoardUtil } from "./board.util";
 import { PieceEvaluations } from "./piece-evaluations.util";
 
-type PieceTypeToValueMap = { [key in PieceType]: number };
-type PositionEvaluations = { [key in Color.WHITE | Color.BLACK]: number[][] };
-type PiecePositionEvaluations = { [key in PieceType]: PositionEvaluations };
-
 export class AiUtil {
-    private static readonly pieceValues: PieceTypeToValueMap = {
-        [PieceType.PAWN]: 10,
-        [PieceType.KNIGHT]: 30,
-        [PieceType.BISHOP]: 30,
-        [PieceType.ROOK]: 50,
-        [PieceType.QUEEN]: 90,
-        [PieceType.KING]: 900
-    };
-
-    private static positionEvaluations: PiecePositionEvaluations = {
-        [PieceType.PAWN]: {
-            [Color.WHITE]: PieceEvaluations.whitePawnEvaluations,
-            [Color.BLACK]: PieceEvaluations.whitePawnEvaluations.slice().reverse()
-        },
-        [PieceType.KNIGHT]: {
-            [Color.WHITE]: PieceEvaluations.knightEvaluations,
-            [Color.BLACK]: PieceEvaluations.knightEvaluations
-        },
-        [PieceType.BISHOP]: {
-            [Color.WHITE]: PieceEvaluations.whiteBishopEvaluations,
-            [Color.BLACK]: PieceEvaluations.whiteBishopEvaluations.slice().reverse()
-        },
-        [PieceType.ROOK]: {
-            [Color.WHITE]: PieceEvaluations.whiteRookEvaluations,
-            [Color.BLACK]: PieceEvaluations.whiteBishopEvaluations.slice().reverse(),
-        },
-        [PieceType.QUEEN]: {
-            [Color.WHITE]: PieceEvaluations.queenEvaluations,
-            [Color.BLACK]: PieceEvaluations.queenEvaluations
-        },
-        [PieceType.KING]: {
-            [Color.WHITE]: PieceEvaluations.whiteKingEvaluations,
-            [Color.BLACK]: PieceEvaluations.whiteKingEvaluations.slice().reverse()
-        },
-    };
-
     public static calculateBestMove(gameClient: any, color: Color, depth: number = 0): string {
         const possibleValidMoves = gameClient.moves();
         let bestMoveValue = Number.NEGATIVE_INFINITY;
@@ -96,14 +56,11 @@ export class AiUtil {
                 const piece: Piece = board[r][c];
 
                 if (piece.color != Color.NONE) {
-                    evaluationValue += AiUtil.getPieceValue(piece.type, piece.color, r, c);
+                    evaluationValue += PieceEvaluations.getPieceValue(piece.type, piece.color, r, c);
                 }
             }
         }
 
         return moveColor === Color.WHITE ? evaluationValue : -evaluationValue;
-    }
-    private static getPieceValue(pieceType: PieceType, pieceColor: Color, r: number, c: number): number {
-        return AiUtil.pieceValues[pieceType] + AiUtil.positionEvaluations[pieceType][pieceColor][c][r];
     }
 }

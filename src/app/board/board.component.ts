@@ -34,9 +34,6 @@ export class BoardComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.aiService.calculateBestMove(this._gameClient.fen(), Color.WHITE, 2).subscribe(data => {
-			console.log(data);
-		});
 	}
 
 	public couldMove({ rank, file }: { rank: Rank; file: File }): boolean {
