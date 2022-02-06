@@ -63,5 +63,11 @@ module.exports = function (config) {
 		browsers: ['Chrome'],
 		singleRun: false,
 		restartOnFileChange: true,
+		customLaunchers: {
+          ChromeHeadlessCustom: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox', '--disable-gpu']
+          }
+        }
 	});
 };

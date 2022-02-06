@@ -6,8 +6,8 @@
 		"start": "ng serve",
 		"build": "ng build",
 		"build:prod": "ng build --prod --aot=true --buildOptimizer=true",
-		"test": "ng test --no-watch",
-		"code-coverage": "ng test --no-watch --code-coverage",
+		"test": "ng test --no-watch --browsers=ChromeHeadlessCustom",
+		"code-coverage": "ng test --no-watch --code-coverage --browsers=ChromeHeadlessCustom",
 		"sonar": "sonar-scanner",
 		"lint": "ng lint",
 		"e2e": "ng e2e"
@@ -48,6 +48,7 @@
 		"postcss-loader": "^4.2.0",
 		"postcss-scss": "^3.0.5",
 		"protractor": "~7.0.0",
+		"puppeteer": "^13.1.3",
 		"sonar-scanner": "^3.1.0",
 		"tailwindcss": "^2.1.2",
 		"ts-node": "~8.3.0",
