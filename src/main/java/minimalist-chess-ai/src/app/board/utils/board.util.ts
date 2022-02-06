@@ -1,6 +1,5 @@
 import { Color, Piece, Rank, File } from '../pieces/piece';
 import { Pawn } from '../pieces/pawn';
-import { Notation } from './chess.util';
 import { Rook } from '../pieces/rook';
 import { Knight } from '../pieces/knight';
 import { Bishop } from '../pieces/bishop';
@@ -22,7 +21,10 @@ export class BoardUtil {
 		for (let r = 0; r < 8; r++) {
 			for (let c = 0; c < 8; c++) {
 				const piece = gameBoard[r][c];
-				const [rank, file] = [BoardUtil.getRankFromX(r), BoardUtil.getFileFromY(c)];
+				const [rank, file] = [
+					BoardUtil.getRankFromX(r),
+					BoardUtil.getFileFromY(c),
+				];
 
 				if (!piece) {
 					const nonePiece = new None(Color.NONE);
@@ -32,8 +34,7 @@ export class BoardUtil {
 					continue;
 				}
 
-				const color =
-					piece.color === 'w' ? Color.WHITE : Color.BLACK;
+				const color = piece.color === 'w' ? Color.WHITE : Color.BLACK;
 				let boardPiece: Piece;
 
 				switch (piece.type) {
@@ -66,22 +67,15 @@ export class BoardUtil {
 		return board;
 	}
 
-	private static getYFromFile(file: File) {
-		return file.charCodeAt(0) - 97;
-	}
-	private static getXFromRank(rank: Rank) {
-		return 8 - rank;
-	}
 	private static getRankFromX(x: number): Rank {
-		if (!(0 <= x && x < 8))
-			throw Error(`Invalid x: ${x}`);
+		if (!(0 <= x && x < 8)) throw Error(`Invalid x: ${x}`);
 
 		return (8 - x) as Rank;
 	}
-	private static getFileFromY(y: number): File {
-		if (!(0 <= y && y < 8))
-			throw Error(`Invalid y: ${y}`);
 
-		return (String.fromCharCode(y + 97)) as File;
+	private static getFileFromY(y: number): File {
+		if (!(0 <= y && y < 8)) throw Error(`Invalid y: ${y}`);
+
+		return String.fromCharCode(y + 97) as File;
 	}
 }

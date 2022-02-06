@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, Piece, Rank, File } from './pieces/piece';
 import { Board, BoardUtil } from './utils/board.util';
-import { AiUtil } from './utils/ai.util';
 import { AiService } from './services/ai.service';
 
 //@ts-ignore
-const Chess = require("chess.js");
+const Chess = require('chess.js');
 
 @Component({
 	selector: 'app-board',
 	templateUrl: './board.component.html',
 	styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent {
 	private _gameClient: any = new Chess();
 	private _board: Board = BoardUtil.getBoardFromGameClient(this._gameClient);
 	public get board() {
@@ -30,11 +29,7 @@ export class BoardComponent implements OnInit {
 
 	public Color = Color;
 
-	constructor(private aiService: AiService) {
-	}
-
-	ngOnInit(): void {
-	}
+	constructor(private aiService: AiService) {}
 
 	public couldMove({ rank, file }: { rank: Rank; file: File }): boolean {
 		return this.possibleMoves.some(
@@ -72,30 +67,30 @@ export class BoardComponent implements OnInit {
 		if (piece.color === Color.NONE) return;
 
 		this.focusedPiece = piece;
-		this.possibleMoves = this._gameClient.moves({
-			square: `${piece.file}${piece.rank}`,
-			verbose: true
-		})
-			.map((move) =>
-			({
+		this.possibleMoves = this._gameClient
+			.moves({
+				square: `${piece.file}${piece.rank}`,
+				verbose: true,
+			})
+			.map((move) => ({
 				notatedMove: move.san,
 				file: move.to[0],
 				rank: +move.to[1],
-			})
-			);
+			}));
 	}
 
 	private makeAiMove() {
 		this.resetFocus();
 
-		this.aiService.calculateBestMove(this._gameClient.fen(), Color.BLACK, 2).subscribe(bestMoveNotated => {
-			this._gameClient.move(bestMoveNotated);
-			this.switchMove();
-			this._board = BoardUtil.getBoardFromGameClient(
-				this._gameClient
-			);
-		});
-
+		this.aiService
+			.calculateBestMove(this._gameClient.fen(), Color.BLACK, 2)
+			.subscribe((bestMoveNotated) => {
+				this._gameClient.move(bestMoveNotated);
+				this.switchMove();
+				this._board = BoardUtil.getBoardFromGameClient(
+					this._gameClient
+				);
+			});
 	}
 
 	private resetFocus() {
@@ -104,6 +99,7 @@ export class BoardComponent implements OnInit {
 	}
 
 	private switchMove() {
-		this._currentMove = this._currentMove === Color.WHITE ? Color.BLACK : Color.WHITE;
+		this._currentMove =
+			this._currentMove === Color.WHITE ? Color.BLACK : Color.WHITE;
 	}
 }

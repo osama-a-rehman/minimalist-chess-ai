@@ -1,12 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+/src/main/java/minimalist-chess-ai/dist
 /tmp
 /out-tsc
+/target/**
 
 # dependencies
-/node_modules
+**/node_modules
 
 # IDEs and editors
 /.idea
@@ -16,6 +17,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+/npm/
 
 # IDE - VSCode
 .vscode/*
@@ -32,10 +34,13 @@
 npm-debug.log
 testem.log
 /typings
+**/.scannerwork/**
 
 # e2e
 /e2e/*.js
 /e2e/*.map
+**/coverage/**
+**/reports/**
 
 # System Files
 .DS_Store
