@@ -24,12 +24,49 @@ I have used Git as the Version Control system for this project and I understood 
 
 3) <b>State Diagram</b>: A UML State diagram is a diagram used in computer science to describe the behavior of a system considering all the possible states of an object when an event occurs. The following graphic shows the UML State Diagram of Minimalist Chess AI project.
  ![State Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/state-diagram.png)
-   
+
+## 4) Metrics:
+I used SonarQube as the Code Quality analyzer for this project. The following are the most interesting metrics that helped me improve code quality:
+
+1) <b>Code smell</b>: Sonarqube highlighted 7 code smells in the code due to commented code and unused imports as shown in the figure below. I removed these code smells from the code afterwards.
+
+![Code Smell](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/2b4a08e1bd15a0f89240ad58132ef70c66161d29/images/metrics/code-smell.png)
+
+2) <b>Complexity</b>: I analyzed the function that calculates the best move for AI i.e.[AIUtil#calculateBestMove()](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts#L6) for code complexity and Sonarqube reported the Cyclomatic Complexity of `17` and Cognitive Complexity of `23` as shown in the figure below.
+
+![Code Complexity](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/2b4a08e1bd15a0f89240ad58132ef70c66161d29/images/metrics/code-complexity.png)
+
+3) <b>Duplication</b>: Sonarqube analyzed the code for duplication and found no duplications in code as shown below.
+
+![Code Duplication](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/2b4a08e1bd15a0f89240ad58132ef70c66161d29/images/metrics/code-duplication.png)
+
+4) <b>Size</b>: Another interesting metric is the size of the project. As the following figure shows, the project has `631` lines of code divided into `26` files. There are `16` classes in the project and `32` functions. The comments span `2.9%` of the lines of code in the project.
+
+![Code Size](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/2b4a08e1bd15a0f89240ad58132ef70c66161d29/images/metrics/code-size.png)
+
+
 ## 5) Clean Code Development:
 In order to write Clean Code, generally I keep in mind `SOLID` principles put forward by <b>Robert C. Martin</b>, `DRY` principle which means "Don't repeat yourself" and `KISS` meaning "Keep it super simple". To be specific, I use following Cheatsheet to make sure that the code I have written is Clean Code.
 
 Moreover, the following points show how the code I've written as part of this project is Clean Code.
 1) <b></b>
+
+## 6) Build Management:
+I used `Maven` as the build management tool for the project. To interact with the npm project, I used the maven plugin [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/usage.html) by MojoHaus. The plugin provides hooks around maven phases/goals. These hooks can be used to perform npm specific operations, e.g. build project, run tests, generate code-coverage reports, etc. when a particular phase or goal of maven is executed.
+
+The [pom.xml](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/pom.xml) can be found here.
+
+The following points are important for explanation about the above pom.xml:
+1) The plugin is defined in the pom.xml and is configured [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L138) by setting the working directory to where the npm project is kept.
+2) When the clean goal of the maven is executed, [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L121-L134), the plugin performs the cleaning of the npm project by cleaning the npm cache. 
+3) When the initialize goal of the maven is executed, [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L25-L37), the plugin performs the initialization of the npm project by running npm install so that the project's dependencies could be initialized.
+4) When the compile goal of the maven is executed, [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L40-L53), the plugin runs the npm command `npm run build` that builds the project for testing.
+5) When the test goal of the maven is executed, [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L56-L69), the plugin runs the command `npm test --no-watch` that runs the underlying unit tests in the npm project.
+6) When the package goal of the maven is executed, [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/d19daf410a9ec691f4deb3c6f521cdc6a8af3555/pom.xml#L72-L85), the plugin runs the command `npm run build:prod` that builds the production application ready for deployment.
+
+## 7) Unit testing:
+I've written the unit tests for the project in the following files:
+
 
 ## 8) Continous Integration/Continous Delivery:
 
