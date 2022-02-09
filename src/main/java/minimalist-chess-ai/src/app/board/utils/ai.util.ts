@@ -47,7 +47,7 @@ export class AiUtil {
 		}
 
 		const possibleValidMoves = gameClient.moves();
-		const minimaxFn = isMaximizing ? Math.max : Math.min;
+		const minimaxFn = AiUtil.getMiniMaxFn(isMaximizing);
 		let bestMoveValue = isMaximizing
 			? Number.NEGATIVE_INFINITY
 			: Number.POSITIVE_INFINITY;
@@ -95,5 +95,9 @@ export class AiUtil {
 		}
 
 		return moveColor === Color.WHITE ? evaluationValue : -evaluationValue;
+	}
+
+	private static getMiniMaxFn(isMaximizing: boolean) {
+		return isMaximizing ? Math.max : Math.min;
 	}
 }
