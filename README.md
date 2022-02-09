@@ -1,5 +1,6 @@
 
 
+
 ## 1) Use and understand Git:
 
 I have used Git as the Version Control system for this project and I understood what the various git commands do. The following commands are the ones that I used the most while working on the project.
@@ -68,9 +69,13 @@ My favourite IDE is Intellij IDEA and I used it to develop this project. Five of
 1) <b>Only final data structures</b>: I've used `final` or `readonly` gameClient in the [Board Component](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/board.component.ts#L15) as it's never reassigned after initial assignment. The other 4 attributes in the project are mutable so they have to be kept non-final.
 
 2) <b>Side effect free functions</b>: All the utility functions are side-effect free i.e. they return the same value with same parameters everytime they are called. The examples of side-effect free functions from the project are: 
+   
    a) [AIUtil#calculateBestMove(gameClient, currentMove, depth): string](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts#L6): It returns the notated best move for the player whose current move it is, by evaluating the position using minimax algorithm at a certain depth passed as parameters.
+  
    b) [AIUtil#minimax(gameClient, depth, alpha, beta, isMaximizing): number](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts#L35): It performs the minimax algorithm on the chess position pointed by the game client and tries to minimize or maximize the evaluation and choose the best move accordingly. 
+   
    c) [AIUtil#evaluateBoard(gameClient, currentMove): number](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts#L78): It returns the chess position's evaluation pointed by the game client.
+   
    d) [BoardUtil#getBoardFromGameClient(gameClient: any): Board](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/utils/board.util.ts#L14): It returns the board data type i.e. `Piece[][]` by mapping the chess position from the game client to this data type. It is used to show chess pieces and the board on the website's frontend.
 
    The functions in the [BoardComponent](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/board.component.ts) are not side-effect free as they are used to mutate game state of the BoardComponent class.
@@ -80,6 +85,7 @@ My favourite IDE is Intellij IDEA and I used it to develop this project. Five of
 4) <b>Functions as parameters and return values</b>: All of the utility functions follow this approach they take parameters and based on the parameters, return the consistent value. These function can be found in [AiUtil](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts#L50) and [BoardUtil](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/utils/board.util.ts) classes.
 
 5) <b>Use closures or anonymous functions</b>: I used closures on two places in the project. 
-
+   
    a) Firstly, I used a closure [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3710022f50b3aa2e8acdcac80c415c2479194cf5/src/main/java/minimalist-chess-ai/src/app/board/board.component.ts#L75) to map the valid moves in a particular position to starting and ending squares so that these squares can be highlighted on the board for user's assistance.
+   
    b) Secondly, I used a closure [here](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3710022f50b3aa2e8acdcac80c415c2479194cf5/src/main/java/minimalist-chess-ai/src/app/board/board.component.ts#L87). When the asynchronous evaluation for the best move is done by AI, this closure is called with the best move and this parameter of the closure is used to make the move suggested by AI on the board.
