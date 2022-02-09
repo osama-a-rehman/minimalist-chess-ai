@@ -20,6 +20,7 @@ I have used Git as the Version Control system for this project and I understood 
 2) <b>Sequence Diagram</b>:
    ![Sequence Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/sequence-diagram.png)
 3) <b>State Diagram</b>:
+   
    ![State Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/state-diagram.png)
    
 ## 5) Clean Code Development:
