@@ -12,7 +12,7 @@ const Chess = require('chess.js');
 	styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent {
-	private _gameClient: any = new Chess();
+	private readonly _gameClient: any = new Chess();
 	private _board: Board = BoardUtil.getBoardFromGameClient(this._gameClient);
 	public get board() {
 		return this._board;
