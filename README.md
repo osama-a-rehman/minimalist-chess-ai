@@ -30,9 +30,9 @@ In order to write Clean Code, generally I keep in mind `SOLID` principles put fo
 Moreover, the following points show how the code I've written as part of this project is Clean Code.
 1) <b></b>
 
-## 8) Continous Delivery:
+## 8) Continous Integration/Continous Delivery:
 
-The Continous Delivery pipeline can be found here <LINK_HERE>. The CD pipeline runs when a push or pull request is made to the "main" branch. It then carries out the following steps:
+The CI/CD pipeline can be found here [CI/CD Pipeline](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/681e02da5f9b81c6f5f56b224b063e8283ad22e7/.github/workflows/cd.yml). The CI/CD pipeline runs when a push or pull request is made to the "main" branch. It then carries out the following steps:
 
 1) <b>Set up JDK 11</b>: Setup the ubuntu-20 machine with JDK 11, node.js and npm installed in it.
 
@@ -44,8 +44,7 @@ The Continous Delivery pipeline can be found here <LINK_HERE>. The CD pipeline r
 
 5) <b>Package production build for deployment</b>: It runs the package phase of maven, if the previous stage of the CD pipeline passes, then in this stage, the production build of the project is created without running the tests by passing the -DskipTests argument in the maven command (as the tests have already passed in the previous stage, therefore running tests again aren't necessary).
 
-6) <b>Deploy Project</b>:
-
+6) <b>Deploy Project</b>: This stage of the pipeline is left unimplemented, but it is intended to deploy the application built for production in the last stage to be deployed on a server.
 
 
 ## 9) IDE Shortcuts:
