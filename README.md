@@ -1,4 +1,5 @@
 
+
 ## 1) Use and understand Git:
 
 I have used Git as the Version Control system for this project and I understood what the various git commands do. The following commands are the ones that I used the most while working on the project.
@@ -14,14 +15,14 @@ I have used Git as the Version Control system for this project and I understood 
 5) <b>`git pull --rebase`</b>: I used this command to pull the changes from the remote repository. There are two ways to pull the changes from remote origin, one is to merge and the other is to rebase. Rebasing carries out the pull operation without creating a separate merge commit, whereas Merging creates a commit for merge. I like to keep my change history clean from merge commits therefore I use the `--rebase` flag when pulling remote changes.
 
 ## 2) UML Diagrams:
-1) <b>Class Diagram</b>:
+1) <b>Class Diagram</b>: A UML Class diagram is a type of static structure diagram that describes the structure of a system by showing the system's classes, their attributes, operations (or methods), and the relationships among objects. The following graphic shows the UML Class Diagram of Minimalist Chess AI project.
    ![Class Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/class-diagram.png)
 
-2) <b>Sequence Diagram</b>:
+2) <b>Sequence Diagram</b>: A UML Sequence diagram shows object interactions arranged in time sequence. It depicts the objects involved in the scenario and the sequence of messages exchanged between the objects needed to carry out the functionality of scenario. The following graphic shows the UML Sequence Diagram of Minimalist Chess AI project.
    ![Sequence Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/sequence-diagram.png)
-3) <b>State Diagram</b>:
-   
-   ![State Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/state-diagram.png)
+
+3) <b>State Diagram</b>: A UML State diagram is a diagram used in computer science to describe the behavior of a system considering all the possible states of an object when an event occurs. The following graphic shows the UML State Diagram of Minimalist Chess AI project.
+ ![State Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/state-diagram.png)
    
 ## 5) Clean Code Development:
 In order to write Clean Code, generally I keep in mind `SOLID` principles put forward by <b>Robert C. Martin</b>, `DRY` principle which means "Don't repeat yourself" and `KISS` meaning "Keep it super simple". To be specific, I use following Cheatsheet to make sure that the code I have written is Clean Code.
