@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <skipTests>false</skipTests>
     </properties>
 
     <build>
@@ -65,6 +66,8 @@
                                 <argument>run</argument>
                                 <argument>test</argument>
                             </arguments>
+
+                            <skip>${skipTests}</skip>
                         </configuration>
                     </execution>
 
@@ -80,39 +83,6 @@
                             <arguments>
                                 <argument>run</argument>
                                 <argument>build:prod</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
-                    <!-- The following runs the script that copies the
-                         appropriate files from the npm build directory into the location
-                         'maven-war-plugin' is expecting. -->
-                    <execution>
-                        <id>npm run prepare-for-maven (prepare-package)</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>run</argument>
-                                <argument>prepare-for-maven-war</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
-                    <!-- The following will publish to npm if you run. -->
-                    <execution>
-                        <id>npm run publish (deploy)</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>deploy</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>publish</argument>
                             </arguments>
                         </configuration>
                     </execution>
