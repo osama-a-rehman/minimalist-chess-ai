@@ -10,7 +10,7 @@
 **/node_modules
 
 # IDEs and editors
-/.idea
+**/.idea
 .project
 .classpath
 .c9/
@@ -18,6 +18,8 @@
 .settings/
 *.sublime-workspace
 /npm/
+*.iml
+dsl_calculator/out/
 
 # IDE - VSCode
 .vscode/*
