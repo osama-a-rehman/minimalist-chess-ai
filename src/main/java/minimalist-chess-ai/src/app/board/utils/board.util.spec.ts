@@ -1,7 +1,3 @@
-import { Bishop } from '../pieces/bishop';
-import { Knight } from '../pieces/knight';
-import { Color } from '../pieces/piece';
-import { Rook } from '../pieces/rook';
 import { BoardUtil } from './board.util';
 
 //@ts-ignore
