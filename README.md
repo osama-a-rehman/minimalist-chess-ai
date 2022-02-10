@@ -50,7 +50,11 @@ In order to write Clean Code, generally I keep in mind `SOLID` principles put fo
 [Clean Code  Development - Cheat sheet](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0fc15c2862bcd43a8cc372847ca7f46dd824658b/images/clean-code/Clean%20Code%20Development%20-%20Cheat%20Sheet.pdf)
 
 Moreover, the following points show how the code I've written as part of this project is Clean Code according to the rules mentioned in the above provided Cheat Sheet:
-1) <b>Naming Rules</b>: I've used 
+1) <b>General Rules</b>: I've followed KISS (Keep it Super Simple) rule by keeping simplistic functions that do only one thing like the functions in [ai.util.ts]() and [board.util.ts](). I also followed DRY (Don't repeat yourself) rule as Sonarqube shows that there are 0% duplications in the project.
+2) <b>Function Rules</b>: I've written relatively small function that have single responsibility, e.g. have a look at functions in [ai.util.ts]() and [board.util.ts]().
+3) <b>Error Handling</b>: I've written functions that throw errors when error occurs and the error handling is kept separate from the business code. E.g. have a look at these functions:
+4) <b>Testing</b>: I've kept only one assertion per test as the cheat sheet suggests. Also, I've tried to keep test code as clean as the production code itself. The tests can be found here: [ai.util.spec.ts]() and [board.util.spec.ts]().
+5) <b>Code Readability</b>: I've used similar coding style all over the project. Also, as the cheat sheet says, dedicated types should be preferred over primitive data types. That's why, I've used dedicated data types for Board, Piece, File, Ranks, etc. that can be found here.
 
 ## 6) Build Management:
 I used `Maven` as the build management tool for the project. To interact with the npm project, I used the maven plugin [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/usage.html) by MojoHaus. The plugin provides hooks around maven phases/goals. These hooks can be used to perform npm specific operations, e.g. build project, run tests, generate code-coverage reports, etc. when a particular phase or goal of maven is executed.
