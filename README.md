@@ -1,3 +1,4 @@
+
 ## 1) Use and understand Git:
 
 I have used Git as the Version Control system for this project and I understood what the various git commands do. The following commands are the ones that I used the most while working on the project.
@@ -44,9 +45,10 @@ I used SonarQube as the Code Quality analyzer for this project. The following ar
 
 ## 5) Clean Code Development:
 In order to write Clean Code, generally I keep in mind `SOLID` principles put forward by <b>Robert C. Martin</b>, `DRY` principle which means "Don't repeat yourself" and `KISS` meaning "Keep it super simple". To be specific, I use following Cheatsheet to make sure that the code I have written is Clean Code.
+[Clean Code  Development - Cheat sheet](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0fc15c2862bcd43a8cc372847ca7f46dd824658b/images/clean-code/Clean%20Code%20Development%20-%20Cheat%20Sheet.pdf)
 
-Moreover, the following points show how the code I've written as part of this project is Clean Code.
-1) <b></b>
+Moreover, the following points show how the code I've written as part of this project is Clean Code according to the rules mentioned in the above provided Cheat Sheet:
+1) <b>Naming Rules</b>: I've used 
 
 ## 6) Build Management:
 I used `Maven` as the build management tool for the project. To interact with the npm project, I used the maven plugin [exec-maven-plugin](https://www.mojohaus.org/exec-maven-plugin/usage.html) by MojoHaus. The plugin provides hooks around maven phases/goals. These hooks can be used to perform npm specific operations, e.g. build project, run tests, generate code-coverage reports, etc. when a particular phase or goal of maven is executed.
@@ -99,6 +101,15 @@ My favourite IDE is Intellij IDEA and I used it to develop this project. Five of
 4) <b>Shift+F6</b>: Shift+F6 is the shortcut for Rename Refactoring to change names of symbols, files, directories, packages, modules and all the references to them throughout the project.
 
 5) <b>Alt+F7</b>: Pressing Alt+F7 shows the usages of what is under the cursor across the project. For example, pressing Alt+F7 on the interface name, the search window will show all the places that the interface is used whether it’s a field declaration or a class that implements this interface.
+
+## 10) DSL
+As it was difficult to create a DSL for my own project, therefore I've created a groovy DSL for a simple calculator with four basic operation `sum`, `subtract`, `multiply`, and `divide`.
+
+The whole DSL project consists of four files:
+1) <b>[ICalculator](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3b6993d4b43c7f7ed6003ce72863d3d8e4c4d907/dsl_calculator/src/com/osama/dsl/calculator/ICalculator.groovy)</b>: An interface that defines the methods of the calculator i.e. `sum`, `subtract`, `multiply`, and `divide`.
+2) <b>[CalculatorImpl](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3b6993d4b43c7f7ed6003ce72863d3d8e4c4d907/dsl_calculator/src/com/osama/dsl/calculator/CalculatorImpl.groovy)</b>: A class that implements the ICalculator interface.
+3) <b>[DSLCaller](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3b6993d4b43c7f7ed6003ce72863d3d8e4c4d907/dsl_calculator/src/com/osama/dsl/DSLCaller.groovy)</b>: DSLCaller is the class that creates the binding between DSL API with the actual calculator methods. For example, it binds the command `sum` with calculator's sum method, and similarly other methods as well. It then creates the groovy shell with the command/method bindings and then evaluate the DSL script `CalculatorConsole.groovy`.
+4) <b>[CalculatorConsole](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/3b6993d4b43c7f7ed6003ce72863d3d8e4c4d907/dsl_calculator/src/com/osama/dsl/CalculatorConsole.groovy)</b>: This file contains the actual DSL commands that perform the calculations. It contains four different commands that `sum`, `subtract`, `multiply`, and `divide` two numbers using a simple interface that actually calls the Calculator methods written in groovy to perform the actual calculations.
 
 ## 11) Functional Programming
 1) <b>Only final data structures</b>: I've used `final` or `readonly` gameClient in the [Board Component](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/0d404c368e846230fb2cb8b448d33429a8d41c77/src/main/java/minimalist-chess-ai/src/app/board/board.component.ts#L15) as it's never reassigned after initial assignment. The other 4 attributes in the project are mutable so they have to be kept non-final.
