@@ -1,7 +1,9 @@
-
-
 # Advanced Software Engineering
-This is my project "Minimalist Chess AI" as a submission for the Advanced Software Engineering course of Masters in Data Science at Berliner Hochschule für Technik Berlin. This README explains the usage of 11 different Software Engineering concepts in this project as taught in the class of Advanced Software Engineering.
+This is my project "Minimalist Chess AI" as a submission for the Advanced Software Engineering course of Masters in Data Science at Berliner Hochschule für Technik Berlin. The project contains the implementation of a Chess Engine using minimax function that evaluates a particular position and suggests the best move in the position. The demo of the project can be seen here:
+
+![Minimalist Chess AI](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/images/project.gif)
+
+This README explains the usage of 11 different Software Engineering concepts in this project as taught in the class of Advanced Software Engineering.
 
 ## 1) Use and understand Git:
 
