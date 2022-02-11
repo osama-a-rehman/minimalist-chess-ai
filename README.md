@@ -25,6 +25,21 @@ I have used Git as the Version Control system for this project and I understood 
 3) <b>State Diagram</b>: A UML State diagram is a diagram used in computer science to describe the behavior of a system considering all the possible states of an object when an event occurs. The following graphic shows the UML State Diagram of Minimalist Chess AI project.
  ![State Diagram](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/5dc55ed59781af26db62a7cf435d7c0977496cbd/images/uml-digrams/state-diagram.png)
 
+## 3) Domain Driven Design:
+
+<b>Domains</b>:
+I identified the following domains in the "Minimalist Chess AI" project:
+1) <b>Chess Board</b>: The Chess board itself can be identified as a domain. It involves having a board, chess piece and well defined moves that the chess pieces could make. The implementation of this domain is taken from a [Chess Library](https://www.npmjs.com/package/chess.js), and is used as `gameClient` in the project.
+2) <b>Chess Engine</b>: The Chess English could be identified as a domain. It involves analyzing the chess position, assessing or evaluating it, and computing the best move for a player. The implementation fo this domain can be found in [ai.utils.ts](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts).
+3) <b>Game Analysis</b>: A Chess game's analysis could be taken as a domain as well. The AI that plays against a human could be used to analyze a game and give suggestions about what particular line could have given advantage to a player in an already played game, or it could be used to prepare as well.
+4) <b>Time Control</b>: Time control could be taken as another domain, to have different time controls available so that human could play against an AI in different time controls.
+5) <b>Chess Variants</b>: This domain can be added to the project, to integrate AI with the chess variants like Chess960.
+
+<b>Strategic Design:</b>
+As the project consists of the AI giving the best move for AI which might take arbitrary time to compute, I decided to go with the "Published Language" strategic design. 
+
+It involves having a [Worker/Socket](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/worker/ai.worker.ts) that acts as a socket layer between the "Chess board" and the "Chess Engine". It creates a socket/event listener that listens for the "Move Request Event" from the chess board for a particular position. Once it receives a message from the "Chess board", it delegates the chess position received via `fen` key in the message to the Ai Utility that actually goes on to compute the best move in that position. Once the Ai is done computing the best move, the Worker/Socket sends a message back to its sender with the Best move's Notation e.g. `Qh4` that the "Chess Board" requested in the previous message.
+
 ## 4) Metrics:
 I used SonarQube as the Code Quality analyzer for this project. The following are the most interesting metrics that helped me improve code quality:
 
