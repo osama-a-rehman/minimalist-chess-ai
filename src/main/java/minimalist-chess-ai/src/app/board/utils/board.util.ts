@@ -37,11 +37,11 @@ export class BoardUtil {
 				const color = piece.color === 'w' ? Color.WHITE : Color.BLACK;
 				const boardPieces = {
 					p: new Pawn(color),
-					n: new Pawn(color),
-					b: new Pawn(color),
-					r: new Pawn(color),
-					q: new Pawn(color),
-					k: new Pawn(color),
+					n: new Knight(color),
+					b: new Bishop(color),
+					r: new Rook(color),
+					q: new Queen(color),
+					k: new King(color),
 				};
 				const boardPiece: Piece = boardPieces[piece.type];
 				boardPiece.file = file;
