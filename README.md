@@ -1,3 +1,4 @@
+
 # Advanced Software Engineering
 This is my project "Minimalist Chess AI" as submission for the Advanced Software Engineering course. This README explains the usage of 11 different Software Engineering concepts or tools as taught in class in this project.
 
@@ -37,6 +38,8 @@ I identified the following domains in the "Minimalist Chess AI" project:
 
 <b>Strategic Design:</b>
 As the project consists of the AI giving the best move for AI which might take arbitrary time to compute, I decided to go with the "Published Language" strategic design. 
+
+![Domain Driven Design - Strategic Design](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/images/ddd-strategic-design.png)
 
 It involves having a [Worker/Socket](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/worker/ai.worker.ts) that acts as a socket layer between the "Chess board" and the "Chess Engine". It creates a socket/event listener that listens for the "Move Request Event" from the chess board for a particular position. Once it receives a message from the "Chess board", it delegates the chess position received via `fen` key in the message to the Ai Utility that actually goes on to compute the best move in that position. Once the Ai is done computing the best move, the Worker/Socket sends a message back to its sender with the Best move's Notation e.g. `Qh4` that the "Chess Board" requested in the previous message.
 
