@@ -1,6 +1,6 @@
 
 # Advanced Software Engineering
-This is my project "Minimalist Chess AI" as submission for the Advanced Software Engineering course. This README explains the usage of 11 different Software Engineering concepts or tools as taught in class in this project.
+This is my project "Minimalist Chess AI" as submission for the Advanced Software Engineering course of Masters in Data Science at Berliner Hochschule für Technik Berlin. This README explains the usage of 11 different Software Engineering concepts in this project as taught in the class of Advanced Software Engineering.
 
 ## 1) Use and understand Git:
 
