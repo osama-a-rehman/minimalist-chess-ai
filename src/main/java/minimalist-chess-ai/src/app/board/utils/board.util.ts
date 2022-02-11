@@ -35,29 +35,15 @@ export class BoardUtil {
 				}
 
 				const color = piece.color === 'w' ? Color.WHITE : Color.BLACK;
-				let boardPiece: Piece;
-
-				switch (piece.type) {
-					case 'p':
-						boardPiece = new Pawn(color);
-						break;
-					case 'n':
-						boardPiece = new Knight(color);
-						break;
-					case 'b':
-						boardPiece = new Bishop(color);
-						break;
-					case 'r':
-						boardPiece = new Rook(color);
-						break;
-					case 'q':
-						boardPiece = new Queen(color);
-						break;
-					case 'k':
-						boardPiece = new King(color);
-						break;
-				}
-
+				const boardPieces = {
+					p: new Pawn(color),
+					n: new Pawn(color),
+					b: new Pawn(color),
+					r: new Pawn(color),
+					q: new Pawn(color),
+					k: new Pawn(color),
+				};
+				const boardPiece: Piece = boardPieces[piece.type];
 				boardPiece.file = file;
 				boardPiece.rank = rank;
 				board[r][c] = boardPiece;
