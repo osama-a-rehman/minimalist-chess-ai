@@ -1,3 +1,4 @@
+
 # Advanced Software Engineering
 This is my project "Minimalist Chess AI" as a submission for the Advanced Software Engineering course of Masters in Data Science at Berliner Hochschule für Technik Berlin. The project contains the implementation of a Chess Engine using minimax function that evaluates a particular position and suggests the best move in the position. The demo of the project can be seen here:
 
@@ -33,14 +34,15 @@ I have used Git as the Version Control system for this project and I understood 
 
 <b>Domains</b>:
 I identified the following domains in the "Minimalist Chess AI" project:
-1) <b>Chess Board</b>: The Chessboard itself can be identified as a domain. It involves having a board, chess piece, and well-defined moves that the chess pieces could make. The implementation of this domain is taken from a [Chess Library](https://www.npmjs.com/package/chess.js), and is used as `gameClient` in the project.
+1) <b>Chessboard</b>: The Chessboard itself can be identified as a domain. It involves having a board, chess piece, and well-defined moves that the chess pieces could make. The implementation of this domain is taken from a [Chess Library](https://www.npmjs.com/package/chess.js), and is used as `gameClient` in the project.
 2) <b>Chess Engine</b>: The Chess English could be identified as a domain. It involves analyzing the chess position, assessing or evaluating it, and computing the best move for a player. The implementation of this domain can be found in [ai.utils.ts](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/src/main/java/minimalist-chess-ai/src/app/board/utils/ai.util.ts).
 3) <b>Game Analysis</b>: A Chess game's analysis could be taken as a domain as well. The AI that plays against a human could be used to analyze a game and give suggestions about what particular line could have given an advantage to a player in an already played game, or it could be used to prepare as well.
 4) <b>Time Control</b>: Time control could be taken as another domain, to have different time controls available so that humans could play against an AI in different time controls.
 5) <b>Chess Variants</b>: This domain can be added to the project, to integrate AI with the chess variants like Chess960.
+6) <b>Leaderboard</b>: The Leaderboard could be taken as a domain as well, it will consist of the entities like Players, Player Stats, Player Ratings, etc.
 
 <b>Strategic Design:</b>
-As the project consists of the AI giving the best move for AI which might take arbitrary time to compute, I decided to go with the "Published Language" strategic design. 
+As the project consists of the AI giving the best move for a particular chess position which might take arbitrary time to compute, therefore the primary domains of the project are "Chessboard" and "Chess Engine" and the strategic design throght which the communication between these domains occur is the "Published Language" strategic design as shown below. 
 
 ![Domain Driven Design - Strategic Design](https://github.com/osama-a-rehman/minimalist-chess-ai/blob/main/images/ddd-strategic-design.png)
 
